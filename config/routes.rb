@@ -1,6 +1,9 @@
 Hangman::Application.routes.draw do
+  get "sessions/new"
+  get "users/new"
   resources :words
-
+  resources :users
+  resources :sessions
   resources :categories
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,6 +18,10 @@ Hangman::Application.routes.draw do
   get 'play/preparation/:name' => 'categories#preparation'
   get 'win/preparation/:name' => 'categories#preparation'
   get 'fail/preparation/:name' => 'categories#preparation'
+  
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "sign_up" => "users#new", :as => "sign_up"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

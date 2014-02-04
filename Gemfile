@@ -35,6 +35,9 @@ end
 #authorization library
 gem "cancan"
 
+#cryptography 
+gem "bcrypt-ruby", :require => "bcrypt"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
