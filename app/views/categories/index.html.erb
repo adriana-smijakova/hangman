@@ -1,5 +1,5 @@
 <h1>Listing categories</h1>
-
+<%= @message %>
 <table>
   <thead>
     <tr>
@@ -15,7 +15,13 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name %></td>
-        <td><%= category.icon %></td>
+        <td>
+		  <%if category.icon.empty? || category.icon == ""%>
+            <img src="images/empty.png" alt= <%= category.name %> width="50" height="50"/>
+          <%else%>
+            <img src= <%= category.icon %> alt= <%= category.name %> width="50" height="50"/>
+          <%end%>
+		</td>
         <td><%= link_to 'Show', category %></td>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
         <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,3 +33,5 @@
 <br>
 
 <%= link_to 'New Category', new_category_path %>
+<br/>
+<%= link_to 'Home', root_path %>

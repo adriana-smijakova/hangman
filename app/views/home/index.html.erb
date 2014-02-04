@@ -1,0 +1,23 @@
+<h1>Hangman</h1>
+<h2>Choose game category</h2>
+<%=flash[:notice]%>
+<br/>
+<br/>
+<% @categories.each do |category| %>
+ 
+ <a href ="preparation/<%= category.name %>">
+ <%if category.icon.empty? || category.icon == ""%>
+   <font class="image-with-caption" >
+   <img class="category-image" src="images/empty.png" alt= <%= category.name %> />
+   </font>
+ <%else%>
+<font class="image-with-caption" > 
+ <img src= <%= category.icon %> alt= <%= category.name %> width="100" height="100"/>
+ </a>
+ <%= category.name %></font>
+ <%end%>
+ 
+ 
+<% end %>
+
+<br />

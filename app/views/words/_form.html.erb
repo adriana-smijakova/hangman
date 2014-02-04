@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :category_id %><br>
-    <%= f.text_field :category_id %>
+    <%= f.collection_select :category_id, Category.order(:name),:id,:name, @word.category == nil ? {} : {selected: @word.category.id } %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -6,9 +6,41 @@
 </p>
 
 <p>
-  <strong>Icon:</strong>
+  <strong>Path to icon:</strong>
   <%= @category.icon %>
 </p>
+
+<%if @category.icon.empty? || @category.icon == ""%>
+<%else%>
+<p>
+  <strong>Icon image:</strong>
+  <img src= <%= @category.icon %> alt= <%= @category.name %> width="50" height="50"/>
+</p>
+<%end%>
+
+<br/>
+<%if @category.words.empty? %>
+  There are no words in this category
+  <br/>
+  <br/>
+<%else%>
+
+<p>
+<strong>Words:</strong>
+
+
+  <% @category.words.each do |word| %>
+    <%= word.content %>
+	<% if @category.words.last != word %>
+	,
+	<% end %>
+  <% end %>
+
+<%end%>
+</p>
+
+<br/>
+<br/>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>

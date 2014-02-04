@@ -1,0 +1,29 @@
+<h2>Guess word from category: <%= @category.name %></h2>
+<img src="/images/hangman/<%= cookies[:attempt] %>.png" alt="hangman"/>
+<br/>
+<br/>
+<br/>
+<font size="5">
+  <%= session[:word_state] %>
+</font>
+<br/>
+<br/>
+<br/>
+<font size="3">
+<% for i in "a".."z" %>
+  <% if cookies[:used_letters].include? i %>
+    <font color="gray">
+    <%= i %>
+	</font>
+  <% else %>
+    <font color="black">  
+    <a href="<%= @category.name %>?letter=<%= i %>"><b><%= i %></b></a>
+	</font>
+  <% end %>
+<%end%>
+</font>
+<br/>
+<br/>
+<%= link_to 'Next random word from this category',  controller: "categories", action: "preparation" %>
+<br/>
+<%= link_to 'Home', root_path %>

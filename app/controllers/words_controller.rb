@@ -10,6 +10,7 @@ class WordsController < ApplicationController
   # GET /words/1
   # GET /words/1.json
   def show
+    redirect_to :back
   end
 
   # GET /words/new
@@ -56,7 +57,7 @@ class WordsController < ApplicationController
   def destroy
     @word.destroy
     respond_to do |format|
-      format.html { redirect_to words_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

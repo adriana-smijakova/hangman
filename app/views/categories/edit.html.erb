@@ -2,5 +2,45 @@
 
 <%= render 'form' %>
 
+<br/>
+<%if @category.words.empty? %>
+  There are no words in this category
+  <br/>
+  <br/>
+<%else%>
+<h2>Words</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @category.words.each do |word| %>
+      <tr>
+        <td><%= word.content %></td>
+        <td><%= link_to 'Destroy', word, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%end%>
+
+<%= form_for :word, :url => words_path do |f| %>
+  <div class="field">
+    <%= f.label "New word" %><br>
+    <%= f.text_field :content %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :category_id, :value => @category.id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<%end%>
+
 <%= link_to 'Show', @category %> |
 <%= link_to 'Back', categories_path %>
