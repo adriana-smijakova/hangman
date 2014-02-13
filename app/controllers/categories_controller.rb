@@ -1,6 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :set_category_by_name, only: [:play, :preparation]
+  before_action :chceck_set_category, only: [:play]
+  before_action :check_empty_current_word, only: [:play, :win, :fail]
+  before_action :check_done_current_state, only: [:win]
+  before_action :check_fail_permission, only: [:fail]
   
   # GET /preparation/1
   # GET /preparation/1.json
@@ -49,7 +53,6 @@ class CategoriesController < ApplicationController
 	  redirect_to :action => 'win'	
 	end
 	if cookies[:attempt].to_i > 6
-	  cookies[:attempt] = "0"
 	  redirect_to :action => 'fail'	
 	end
   end
@@ -68,6 +71,10 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+	cookies[:current_word] = ""
+	cookies[:attempt] = "0"
+	cookies[:current_word] = ""
+	session[:word_state] = ""
   end
 
   # GET /categories/1
@@ -139,4 +146,36 @@ class CategoriesController < ApplicationController
       params.require(:category).permit(:name, :icon)
     end
 	
+	def check_empty_current_word
+	  if(cookies[:current_word] == nil || cookies[:current_word].empty? ||
+	  session[:word_state] == nil || session[:word_state].empty?)
+	    redirect_to root_path
+      end
+	end
+	
+	def check_done_current_state
+	  if(cookies[:current_word] != session[:word_state])
+	    if(cookies[:current_word] != nil && cookies[:current_word] != "")
+	      redirect_to :action => 'play'	 
+		  return
+		end
+	    redirect_to root_path
+	  end
+	end
+	
+	def check_fail_permission
+	  if(cookies[:attempt].to_i != 7)
+	    if(cookies[:current_word] != nil && cookies[:current_word] != "")
+	      redirect_to :action => 'play'	 
+		  return
+		end
+	    redirect_to root_path 
+	  end
+	end
+	
+	def chceck_set_category
+	  if(@category == nil || @category == "")
+	    redirect_to root_path
+	  end
+	end
 end

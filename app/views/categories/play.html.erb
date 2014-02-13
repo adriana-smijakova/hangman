@@ -1,4 +1,5 @@
 <h2>Guess word from category: <%= @category.name %></h2>
+
 <img src="/images/hangman/<%= cookies[:attempt] %>.png" alt="hangman"/>
 <br/>
 <br/>
@@ -25,5 +26,4 @@
 <br/>
 <br/>
 <%= link_to 'Next random word from this category',  controller: "categories", action: "preparation" %>
-<br/>
-<%= link_to 'Home', root_path %>
+
