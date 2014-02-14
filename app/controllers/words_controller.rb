@@ -1,32 +1,37 @@
 class WordsController < ApplicationController
   before_action :set_word, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+
   # GET /words
   # GET /words.json
   def index
     @words = Word.all
+	authorize! :update, @category
   end
 
   # GET /words/1
   # GET /words/1.json
   def show
+    authorize! :update, @category    
     redirect_to :back
   end
 
   # GET /words/new
   def new
     @word = Word.new
+    authorize! :update, @category	
   end
 
   # GET /words/1/edit
   def edit
+    authorize! :update, @category
   end
 
   # POST /words
   # POST /words.json
   def create
+    authorize! :update, @category
     @word = Word.new(word_params)
-
+    authorize! :update, @category
     respond_to do |format|
       if @word.save
         format.html { redirect_to @word, notice: 'Word was successfully created.' }
@@ -41,6 +46,7 @@ class WordsController < ApplicationController
   # PATCH/PUT /words/1
   # PATCH/PUT /words/1.json
   def update
+    authorize! :update, @category
     respond_to do |format|
       if @word.update(word_params)
         format.html { redirect_to @word, notice: 'Word was successfully updated.' }
@@ -56,6 +62,7 @@ class WordsController < ApplicationController
   # DELETE /words/1.json
   def destroy
     @word.destroy
+	authorize! :update, @category
     respond_to do |format|
       format.html { redirect_to :back }
       format.json { head :no_content }
