@@ -50,11 +50,23 @@ class CategoriesController < ApplicationController
 	
 	if session[:word_state].include? "_"
 	else
-	  redirect_to :action => 'win'	
-	end
+	  if(current_user)
+	    @user = User.find(current_user.id)
+	    @user.update!(email: current_user.email, wins: current_user.wins + 1, looses: current_user.looses)
+		@user.reload
+	  end
+	  redirect_to :action => 'win'
+    end
+	
 	if cookies[:attempt].to_i > 6
-	  redirect_to :action => 'fail'	
-	end
+	  if(current_user)
+	    @user = User.find(current_user.id)
+	    @user.update!(email: current_user.email, wins: current_user.wins, looses: current_user.looses + 1)
+		@user.reload
+	  end
+	  redirect_to :action => 'fail'
+    end
+	
   end
   
   # GET /win/1
@@ -159,9 +171,9 @@ class CategoriesController < ApplicationController
 	end
 	
 	def check_done_current_state
-	  if(cookies[:current_word] != session[:word_state])
-	    if(cookies[:current_word] != nil && cookies[:current_word] != "")
-	      redirect_to :action => 'play'	 
+	  if(cookies[:current_word].eql?(session[:word_state]))
+	    if(cookies[:current_word] != nil && cookies[:current_word].eql?(""))
+	      redirect_to :action => 'play' 
 		  return
 		end
 	    redirect_to root_path
@@ -170,7 +182,7 @@ class CategoriesController < ApplicationController
 	
 	def check_fail_permission
 	  if(cookies[:attempt].to_i != 7)
-	    if(cookies[:current_word] != nil && cookies[:current_word] != "")
+	    if(cookies[:current_word] != nil && cookies[:current_word].eql?(""))
 	      redirect_to :action => 'play'	 
 		  return
 		end

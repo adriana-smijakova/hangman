@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
   
   attr_accessor :password
   before_save :encrypt_password
+  before_create :initialize_state
   
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :password, :on => :update
   validates_presence_of :email
   validates_uniqueness_of :email
   
@@ -22,7 +22,12 @@ class User < ActiveRecord::Base
     if password.present?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    end
+	end
+  end
+  
+  def initialize_state
+    self.wins = 0
+	self.looses = 0
   end
   
 end
