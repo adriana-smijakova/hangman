@@ -82,6 +82,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
+    authorize! :show, @category
     @categories = Category.all
 	cookies[:current_word] = ""
 	cookies[:attempt] = "0"
@@ -152,6 +153,8 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params[:id])
+	  rescue ActiveRecord::RecordNotFound
+        redirect_to root_url, :flash => { :error => "Record not found." }
     end
 	
 	def set_category_by_name

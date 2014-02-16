@@ -24,6 +24,7 @@ Hangman::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
   
   get '/users/:id' => 'home#index'
+  get '*path' => redirect('/')
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

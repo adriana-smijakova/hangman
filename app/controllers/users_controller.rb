@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :update, :show]
-
   def new
     @user = User.new
   end
@@ -25,11 +24,13 @@ class UsersController < ApplicationController
   
   # GET /users/1/edit
   def edit
+    authorize! :update, @user
   end
   
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    authorize! :update, @user
   	respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -45,6 +46,14 @@ class UsersController < ApplicationController
   
   def set_user
     @user = User.find(params[:id])
+	rescue ActiveRecord::RecordNotFound
+      redirect_to root_url, :flash => { :error => "Record not found." }
+  end
+  
+  def catch_not_found
+    yield
+    rescue ActiveRecord::RecordNotFound
+    redirect_to root_url, :flash => { :error => "Record not found." }
   end
   
 end

@@ -22,7 +22,7 @@
     <% @category.words.each do |word| %>
       <tr>
         <td><%= word.content %></td>
-        <td><%= link_to 'Destroy', word, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to image_tag('/icons/delete.png'), word, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

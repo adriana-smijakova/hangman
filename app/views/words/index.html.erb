@@ -14,9 +14,15 @@
     <% @words.each do |word| %>
       <tr>
         <td><%= word.content %></td>
-        <td><%= word.category.name %></td>
-        <td><%= link_to 'Edit', edit_word_path(word) %></td>
-        <td><%= link_to 'Destroy', word, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+		<% if word.category != nil %>
+		  <%= word.category.name %>
+		<% else %>
+		  Word has no category
+		<% end %>
+		</td>
+        <td><%= link_to  image_tag('/icons/edit.png'),edit_word_path(word) %></td>
+        <td><%= link_to  image_tag('/icons/delete.png'), word, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

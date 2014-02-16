@@ -3,19 +3,22 @@
 <br/>
 <% @categories.each do |category| %>
  
- <a href ="preparation/<%= category.name %>">
- <%if category.icon.empty? || category.icon == ""%>
-   <font class="image-with-caption" >
-   <img class="category-image" src="images/empty.png" alt= <%= category.name %> />
-   </font>
- <%else%>
-<font class="image-with-caption" > 
- <img src= <%= category.icon %> alt= <%= category.name %> width="100" height="100"/>
- </a>
- <%= category.name %></font>
- <%end%>
- 
+	<a href ="preparation/<%= category.name %>">
+	<%if category.icon.empty? || category.icon == ""%>
+		<div class="img">
+			<img src="images/empty.png" alt= <%= category.name %> width="100" height="100"/>
+			<div class="desc">
+				<%= category.name %>
+			</div>
+		</div >
+	<%else%>
+		<div class="img">
+			<img src= <%= category.icon %> alt= <%= category.name %> width="100" height="100"/>
+			<div class="desc">
+				<%= category.name %>
+			</div>
+		</div>
+	<%end%>
+	</a>
  
 <% end %>
-
-<br />

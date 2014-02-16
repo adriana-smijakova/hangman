@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Hangman</title>
-  <link rel="shortcut icon" href="/icon.png"/>
+  <link rel="shortcut icon" href="/icon2.png"/>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -10,27 +10,59 @@
 <body>
 <h1>Hangman</h1>
 
-<div id="user_nav">
+<div id="user_nav" style="color:#FFFFFF">
   <% if current_user %>
-    Logged in as <%= link_to current_user.email, controller: "users", action: "edit", id: current_user.id %>.
-    <%= link_to "Log out", log_out_path %>
-	<br/>
-    Wins:
+  	Wins:
+	<font color="#FFFFCC">
     <%= current_user.wins %>
+	</font>
 	Looses:
+	<font color="#FFFFCC">
 	<%= current_user.looses %>
+	</font>
+	<div align="right">
+    Logged in as 
+	<div class = "link_log">
+	<b>
+		<%= link_to current_user.email, controller: "users", action: "edit", id: current_user.id %>
+	</b>
+	</div>
+	.
+	<div class = "link_log">
+	<%= link_to "Log out", log_out_path %>
+	</div>
+	</div>
   <% else %>
-    <%= link_to "Sign up", sign_up_path %> or
+  <div class = "link_log">
+    <%= link_to "Sign up", sign_up_path %>
+  </div>or
+  <div class = "link_log">
     <%= link_to "log in", log_in_path %>
+  </div>
   <% end %>
 </div>
 
+<div class = "menu" style="color:#663366">
+
+<ul>
+ <li><%= link_to "Home", root_path %></li>
+<% if current_user && current_user.email == "admin" %>
+ <li><%= link_to "Categories", categories_path %></li>
+ <li><%= link_to "Words", words_path %></li>
+<% end %>
+</ul>
+</div>
+
+<div class = "notice">
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
+</div>
 
+<div class = "content">
 <%= yield %>
-<br/>
-<%= link_to 'Home', root_path %>
+</div>
+
+
 </body>
 </html>
