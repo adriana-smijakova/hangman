@@ -49,6 +49,7 @@
 <% if current_user && current_user.email == "admin" %>
  <li><%= link_to "Categories", categories_path %></li>
  <li><%= link_to "Words", words_path %></li>
+ <li><%= link_to "Images", controller: "images" %></li>
 <% end %>
 </ul>
 </div>

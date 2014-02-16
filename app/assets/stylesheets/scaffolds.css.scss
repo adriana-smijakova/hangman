@@ -10,6 +10,10 @@ p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+ margin: 5;
+ padding: 0;
+ list-style-type: none;
+ text-align: center;
 }
 
 pre {
@@ -41,13 +45,19 @@ div {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
+  background-color: #990033;
+  color: white;
   display: table;
+  margin-left:auto;
+ margin-right:auto;
 }
 
 #error_explanation {
+  margin: 5px;
+  margin-left:auto;
+  margin-right:auto;
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid purple;
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
@@ -59,7 +69,7 @@ div {
     font-size: 12px;
     margin: -7px;
     margin-bottom: 0px;
-    background-color: #c00;
+    background-color: #990033;
     color: #fff;
   }
   ul li {
