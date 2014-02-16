@@ -36,10 +36,10 @@ end
 gem "cancan"
 
 #cryptography 
-gem "bcrypt-ruby", :require => "bcrypt"
+#gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
