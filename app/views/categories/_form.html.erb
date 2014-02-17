@@ -16,8 +16,9 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :icon %><br>
-    <%= f.text_field :icon %>
+   <p>
+    <%= file_field_tag 'upload[file]' %>
+    </p>
   </div>
   <div class="actions">
     <%= f.submit %>

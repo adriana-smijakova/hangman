@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   before_action :check_empty_current_word, only: [:play, :win, :fail]
   before_action :check_done_current_state, only: [:win]
   before_action :check_fail_permission, only: [:fail]
+  before_action :get_root_image, only: [:create, :update]
   
   # GET /preparation/1
   # GET /preparation/1.json
@@ -129,6 +130,7 @@ class CategoriesController < ApplicationController
   	authorize! :update, @category
     respond_to do |format|
       if @category.update(category_params)
+	    @category.update(icon: session[:category_icon])
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
@@ -197,5 +199,17 @@ class CategoriesController < ApplicationController
 	  if(@category == nil || @category == "")
 	    redirect_to root_path
 	  end
+	end
+	
+	def get_root_image
+      name = params[:upload][:file]
+      directory = "images"
+	  path = File.join(directory, name)
+	  if(path == "images/")
+	    path = ""
+	  #else
+	  #  File.open(path, "wb") { |f| f.write(params[:upload][:file].read) }
+	  end
+      session[:category_icon] = path
 	end
 end
