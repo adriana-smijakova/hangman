@@ -5,7 +5,12 @@ class CategoriesController < ApplicationController
   before_action :check_empty_current_word, only: [:play, :win, :fail]
   before_action :check_done_current_state, only: [:win]
   before_action :check_fail_permission, only: [:fail]
-  before_action :set_icon, only: [:create, :update]  
+<<<<<<< HEAD
+  before_action :set_icon, only: [:create, :update]
+=======
+  before_action :get_root_image, only: [:create, :update]
+>>>>>>> 165d7aeae74773492602a837eecf293c97286d09
+  
   # GET /preparation/1
   # GET /preparation/1.json
   def preparation
@@ -130,8 +135,12 @@ class CategoriesController < ApplicationController
   	authorize! :update, @category
     respond_to do |format|
       if @category.update(category_params)
-	    @category.update(icon: session[:icon])        
-		format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+<<<<<<< HEAD
+	    @category.update(icon: session[:icon])
+=======
+	    @category.update(icon: session[:category_icon])
+>>>>>>> 165d7aeae74773492602a837eecf293c97286d09
+        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -201,6 +210,7 @@ class CategoriesController < ApplicationController
 	  end
 	end
 	
+<<<<<<< HEAD
 	def set_icon
       name = params[:upload][:file]
       directory = "images"
@@ -210,5 +220,17 @@ class CategoriesController < ApplicationController
 	  else
         session[:icon] = path
 	  end
+=======
+	def get_root_image
+      name = params[:upload][:file]
+      directory = "images"
+	  path = File.join(directory, name)
+	  if(path == "images/")
+	    path = ""
+	  #else
+	  #  File.open(path, "wb") { |f| f.write(params[:upload][:file].read) }
+	  end
+      session[:category_icon] = path
+>>>>>>> 165d7aeae74773492602a837eecf293c97286d09
 	end
 end
