@@ -1,4 +1,4 @@
-hangman
+﻿hangman
 =======
 Simple hangman web application.
 To run it in your local computer you need:
