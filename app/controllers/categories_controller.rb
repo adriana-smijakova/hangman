@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   before_action :check_empty_current_word, only: [:play, :win, :fail]
   before_action :check_done_current_state, only: [:win]
   before_action :check_fail_permission, only: [:fail]
+  before_action :set_icon, only: [:create, :update]
   
   # GET /preparation/1
   # GET /preparation/1.json
@@ -111,6 +112,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+	@category.update(icon: session[:icon])
     authorize! :create, @category
     respond_to do |format|
       if @category.save
@@ -129,6 +131,7 @@ class CategoriesController < ApplicationController
   	authorize! :update, @category
     respond_to do |format|
       if @category.update(category_params)
+	    @category.update(icon: session[:icon])
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
@@ -196,6 +199,17 @@ class CategoriesController < ApplicationController
 	def chceck_set_category
 	  if(@category == nil || @category == "")
 	    redirect_to root_path
+	  end
+	end
+	
+	def set_icon
+      name = params[:upload][:file]
+      directory = "images"
+      path = File.join(directory, name)
+	  if(path == "images/")
+	    session[:icon] = ""
+	  else
+        session[:icon] = path
 	  end
 	end
 end

@@ -17,8 +17,8 @@
   </div>
   <div class="field">
     <%= f.label :icon %><br>
-    <%= f.text_field :icon %>
-  </div>
+    <%= file_field_tag 'upload[file]' %>
+  </div> 
   <div class="actions">
     <%= f.submit %>
   </div>

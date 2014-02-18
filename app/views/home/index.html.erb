@@ -1,6 +1,9 @@
 <h2>Choose game category</h2>
 <br/>
 <br/>
+<% if @categories.empty? %>
+Currently there is no category to choose.
+<% end %>
 <% @categories.each do |category| %>
  
 	<a href ="preparation/<%= category.name %>">
