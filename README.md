@@ -7,9 +7,13 @@ Ruby on Rails >= 4.0.2
 
 Next step is type these commands in directory where you have hangman 
 (you can get it throught "git clone https://github.com/adriana-smijakova/hangman.git"):
+
 bundle install
+
 rake db:migrate
+
 rake db:seed
+
 rails server
 
 If everything ran correctly you should be able to acces hangman website by typing
