@@ -6,7 +6,7 @@ Ruby  >= 1.9.3
 Ruby on Rails >= 4.0.2
 
 Next step is type these commands in directory where you have hangman 
-(you can get it throught "git clone https://github.com/adriana-smijakova/hangman.git"):
+(you can get it throughtfrom this https://github.com/adriana-smijakova/hangman/tree/fccf3260d8bc152b0df704dd96b1b8c9f6dc660c - newer version is modified for heroku):
 
 bundle install
 
